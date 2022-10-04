@@ -20,7 +20,6 @@ jobs:
       - name: Native Scanner module
         uses: boostsecurityio/boostsec-scanner-github@v4.1
         with:
-          api_enabled: "false"
           registry_module: scanners/boostsecurityio/native-scanner
           
 #     steps:
