@@ -1,4 +1,4 @@
-name: boost (Dev)
+name: dev.boostsec.io
 on:
   workflow_dispatch:
   push:
@@ -12,21 +12,18 @@ on:
       - synchronize
 jobs:
   boost_security_sast:
-    name: SAST / Scanner
+    name: SAST
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-      - name: Native Scanner module
-        uses: boostsecurityio/boostsec-scanner-github@boost-new-cli
+      - name: Native Scanner
+        uses: boostsecurityio/boostsec-scanner-github@bv4
         with:
           api_endpoint: https://api.dev.boostsec.io
           api_token: ${{ secrets.BOOST_API_KEY_DEV }}
-          registry_module: scanners/boostsecurityio/native-scanner
-          
-#     steps:
-#       - name: Checkout
-#         uses: actions/checkout@v2
+          registry_module: boostsecurityio/native-scanner
+##############################################################################################################################
 #       - name: Install pre-scan dependencies
 #         run: |
 #           download_verify_and_unpack() {
@@ -42,12 +39,9 @@ jobs:
 #           chmod +x /usr/local/bin/render-k8s.sh
 #       - name: Scanner
 #         uses: boostsecurityio/boostsec-scanner-github@v3
-#         env:
-#           BOOST_LOG_LEVEL: ${{ github.event.inputs.logLevel }}
 #         with:
 #           action: scan
 #           additional_args: --pre-scan-command "/usr/local/bin/render-k8s.sh"
 #           api_endpoint: https://api.dev.boostsec.io
 #           step_name: scanner-dev
 #           api_token: ${{ secrets.BOOST_API_KEY_DEV }}
-          
