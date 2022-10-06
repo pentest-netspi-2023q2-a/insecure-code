@@ -1,15 +1,6 @@
 name: boost (Prod)
 on:
   workflow_dispatch:
-    inputs:
-      logLevel:
-        description: 'Log level'
-        required: true
-        default: 'INFO'
-        type: choice
-        options:
-        - INFO
-        - DEBUG
   push:
     branches:
       - main
@@ -25,25 +16,16 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@v2
-      - name: Install pre-scan dependencies
-        run: |
-          download_verify_and_unpack() {
-            (curl -s -L "$1" | tee /tmp/toxic | shasum -s -a256 -c <(echo "$3  -") && tar -C  $(dirname "$2") -xzf /tmp/toxic "$4" && if [[ ! -z "$4" ]]; then mv "$(dirname $2)/$4" "$2"; else true; fi && chmod +x "$2") || (rm -f /tmp/toxic && false)
-          }
-          download_verify_and_unpack https://get.helm.sh/helm-v3.7.1-linux-amd64.tar.gz /usr/local/bin/helm 6cd6cad4b97e10c33c978ff3ac97bb42b68f79766f1d2284cfd62ec04cd177f4 linux-amd64/helm
-      - name: Prepare pre-scan script
-        run: |
-          cat << EOF > /usr/local/bin/render-k8s.sh
-          #!/bin/bash
-          helm template canaries/helm/charts/hello-world --output-dir ./generated
-          EOF
-          chmod +x /usr/local/bin/render-k8s.sh
-      - name: Scanner
-        uses: boostsecurityio/boostsec-scanner-github@v3
-        env:
-          BOOST_LOG_LEVEL: ${{ github.event.inputs.logLevel }}
+        uses: actions/checkout@v3
+      - name: Setup Helm
+        uses: azure/setup-helm@v3
         with:
-          action: scan
-          additional_args: --pre-scan-command "/usr/local/bin/render-k8s.sh"
+          version: v3.7.1
+      - name: Native Scanner module
+        uses: boostsecurityio/boostsec-scanner-github@v4
+        with:
+          api_enabled: "false"
           api_token: ${{ secrets.BOOST_API_KEY_PROD }}
+          registry_module: scanners/boostsecurityio/native-scanner
+          pre_scan_cmd: |
+            helm template canaries/helm/charts/hello-world --output-dir ./generated
