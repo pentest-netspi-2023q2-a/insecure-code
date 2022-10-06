@@ -24,8 +24,8 @@ jobs:
       - name: Native Scanner module
         uses: boostsecurityio/boostsec-scanner-github@v4
         with:
-          api_enabled: "false"
+          api_enabled: false
           api_token: ${{ secrets.BOOST_API_KEY_PROD }}
-          registry_module: scanners/boostsecurityio/native-scanner
+          registry_module: boostsecurityio/native-scanner
           pre_scan_cmd: |
             helm template canaries/helm/charts/hello-world --output-dir ./generated
