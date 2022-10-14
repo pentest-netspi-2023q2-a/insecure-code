@@ -1,0 +1,9 @@
+version: '2.1'
+orbs:
+  boost-security-scanner: boostsecurityio/scanner@3.0.0
+workflows:
+  build:
+    jobs:
+      - boost-security-scanner/scan:
+          context: boost-security
+  version: 2
