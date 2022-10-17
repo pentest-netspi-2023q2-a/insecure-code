@@ -32,7 +32,7 @@ jobs:
         uses: boostsecurityio/boostsec-scanner-github@v4
         env:
           BOOST_IMAGE_NAME: public.ecr.aws/boostsecurityio/boost-scanner-brakeman:bece2bd
-          BOOST_SCANNER_REGISTRY: https://github.com/boostsecurityio/scanner-testing.git#fproulx-boostsecurity-patch-1
+          BOOST_SCANNER_REGISTRY_REPO: https://github.com/boostsecurityio/scanner-testing.git#fproulx-boostsecurity-patch-1
         with:
           api_token: ${{ secrets.BOOST_API_KEY }}
           registry_module: boostsecurityio/trivy-image
