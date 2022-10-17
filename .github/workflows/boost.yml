@@ -35,7 +35,7 @@ jobs:
         with:
           api_token: ${{ secrets.BOOST_API_KEY }}
           registry_module: boostsecurityio/trivy-image
-          registry: https://github.com/boostsecurityio/scanner-testing
+          registry: https://github.com/boostsecurityio/scanner-testing#fproulx-boostsecurity-patch-1
   boost-sast-dev:
     name: SAST (Dev)
     runs-on: ubuntu-latest
