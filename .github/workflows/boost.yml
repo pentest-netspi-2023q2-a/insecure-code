@@ -31,7 +31,8 @@ jobs:
       - name: Trivy Image
         uses: boostsecurityio/boostsec-scanner-github@v4
         env:
-          BOOST_IMAGE_NAME: public.ecr.aws/boostsecurityio/boost-scanner-brakeman:bece2bd
+#           BOOST_IMAGE_NAME: public.ecr.aws/boostsecurityio/boost-scanner-brakeman:bece2bd
+          BOOST_IMAGE_NAME: ubuntu:bionic-20210222@sha256:32776cc92b5810ce72e77aca1d949de1f348e1d281d3f00ebcc22a3adcdc9f42
         with:
           api_token: ${{ secrets.BOOST_API_KEY }}
           registry_module: boostsecurityio/trivy-image
