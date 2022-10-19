@@ -11,8 +11,30 @@ on:
       - opened
       - synchronize
 jobs:
-  boost-sast:
-    name: SAST
+#   boost-sast:
+#     name: SAST
+#     runs-on: ubuntu-latest
+#     steps:
+#       - name: Checkout
+#         uses: actions/checkout@v3
+#       - name: Setup Helm
+#         uses: azure/setup-helm@v3
+#         with:
+#           version: v3.7.1
+#       - name: Native Scanner
+#         uses: boostsecurityio/boostsec-scanner-github@v4
+#         with:
+#           api_token: ${{ secrets.BOOST_API_KEY }}
+#           registry_module: boostsecurityio/native-scanner
+#           pre_scan_cmd: |
+#             helm template canaries/helm/charts/hello-world --output-dir ./generated
+#       - name: Semgrep
+#         uses: boostsecurityio/boostsec-scanner-github@v4
+#         with:
+#           api_token: ${{ secrets.BOOST_API_KEY }}
+#           registry_module: boostsecurityio/semgrep
+  boost-sast-dev:
+    name: SAST (Dev)
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -23,13 +45,19 @@ jobs:
           version: v3.7.1
       - name: Native Scanner
         uses: boostsecurityio/boostsec-scanner-github@v4
+        env:
+          BOOST_SCANNER_REGISTRY_REPO: https://github.com/boostsecurityio/scanner-testing.git
         with:
-          api_token: ${{ secrets.BOOST_API_KEY }}
+          api_endpoint: https://api.dev.boostsec.io
+          api_token: ${{ secrets.BOOST_API_KEY_DEV }}
           registry_module: boostsecurityio/native-scanner
           pre_scan_cmd: |
             helm template canaries/helm/charts/hello-world --output-dir ./generated
       - name: Semgrep
         uses: boostsecurityio/boostsec-scanner-github@v4
+        env:
+          BOOST_SCANNER_REGISTRY_REPO: https://github.com/boostsecurityio/scanner-testing.git
         with:
-          api_token: ${{ secrets.BOOST_API_KEY }}
+          api_endpoint: https://api.dev.boostsec.io
+          api_token: ${{ secrets.BOOST_API_KEY_DEV }}
           registry_module: boostsecurityio/semgrep
