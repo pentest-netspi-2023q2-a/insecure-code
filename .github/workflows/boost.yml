@@ -30,8 +30,8 @@ jobs:
             helm template canaries/helm/charts/hello-world --output-dir ./generated
       - name: Semgrep
         uses: boostsecurityio/boostsec-scanner-github@v4
-        env:
-          BOOST_SCANNER_REGISTRY_REPO: https://github.com/boostsecurityio/scanner-testing.git#fproulx-boostsecurity-patch-1
+#         env:
+#           BOOST_SCANNER_REGISTRY_REPO: https://github.com/boostsecurityio/scanner-registry.git#semgrep/update-docker-to-fix-taxonomy-rule-mapping
         with:
           api_token: ${{ secrets.BOOST_API_KEY }}
           registry_module: boostsecurityio/semgrep
