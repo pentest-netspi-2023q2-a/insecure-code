@@ -31,25 +31,33 @@ jobs:
           pre_scan_cmd: |
             helm template canaries/helm/charts/hello-world --output-dir ./generated
             
-#       - name: Semgrep
-#         uses: boostsecurityio/boostsec-scanner-github@v4
-#         with:
-#           api_token: ${{ secrets.BOOST_API_KEY }}
-#           registry_module: boostsecurityio/semgrep
-
-#       - name: GitLeaks
-#         uses: boostsecurityio/boostsec-scanner-github@v4
-#         with:
-#           api_token: ${{ secrets.BOOST_API_KEY }}
-#           registry_module: boostsecurityio/gitleaks
+      - name: Semgrep
+        uses: boostsecurityio/boostsec-scanner-github@v4
+        with:
+          api_token: ${{ secrets.BOOST_API_KEY }}
+          registry_module: boostsecurityio/semgrep
           
-#       - name: CodeQL
-#         uses: boostsecurityio/boostsec-scanner-github@v4
-#         env:
-#           CODEQL_LANGUAGE: python
-#         with:
-#           api_token: ${{ secrets.BOOST_API_KEY }}
-#           registry_module: boostsecurityio/codeql
+      - name: Gosec
+        uses: boostsecurityio/boostsec-scanner-github@v4
+        env:
+          BOOST_SCANNER_REGISTRY_REPO: https://github.com/boostsecurityio/scanner-testing.git
+        with:
+          api_token: ${{ secrets.BOOST_API_KEY }}
+          registry_module: boostsecurityio/gosec
+          
+       - name: GitLeaks
+         uses: boostsecurityio/boostsec-scanner-github@v4
+         with:
+           api_token: ${{ secrets.BOOST_API_KEY }}
+           registry_module: boostsecurityio/gitleaks
+           
+       - name: CodeQL
+         uses: boostsecurityio/boostsec-scanner-github@v4
+         env:
+           CODEQL_LANGUAGE: python
+         with:
+           api_token: ${{ secrets.BOOST_API_KEY }}
+           registry_module: boostsecurityio/codeql
 
 
 #   boost-sast-dev:
@@ -80,3 +88,11 @@ jobs:
 #           api_endpoint: https://api.dev.boostsec.io
 #           api_token: ${{ secrets.BOOST_API_KEY_DEV }}
 #           registry_module: boostsecurityio/semgrep
+#       - name: Gosec
+#         uses: boostsecurityio/boostsec-scanner-github@v4
+# #         env:
+# #           BOOST_SCANNER_REGISTRY_REPO: https://github.com/boostsecurityio/scanner-testing.git
+#         with:
+#           api_endpoint: https://api.dev.boostsec.io
+#           api_token: ${{ secrets.BOOST_API_KEY_DEV }}
+#           registry_module: boostsecurityio/gosec
