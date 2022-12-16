@@ -68,7 +68,7 @@ pipeline {
         withCredentials([gitUsernamePassword(credentialsId: "github-token")]) {
           sh label: "scan with ${params.BOOST_SCANNER_REGISTRY_MODULE}",
             script: """
-              // Bug: Parameters may be undefined on initial job configuration
+              # Bug: Parameters may be undefined on initial job configuration
               test "${params.BOOST_ENABLED}" == "true" || exit 0
               export BOOST_API_ENABLED=false
               "${env.WORKSPACE_TMP}/boost-cli/latest" scan repo
