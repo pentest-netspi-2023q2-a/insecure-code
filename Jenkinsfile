@@ -69,7 +69,7 @@ pipeline {
           sh label: "scan with ${params.BOOST_SCANNER_REGISTRY_MODULE}",
             script: """
               # Bug: Parameters may be undefined on initial job configuration
-              if [ "${params.BOOST_ENABLED}" == "true" ]; then
+              if [ "${params.BOOST_ENABLED}" = "true" ]; then
                 export BOOST_API_ENABLED=false
                 "${env.WORKSPACE_TMP}/boost-cli/latest" scan repo
               fi
