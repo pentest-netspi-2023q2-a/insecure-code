@@ -2,8 +2,6 @@ pipeline {
   agent any
 
   environment {
-    GITHUB_TOKEN = credentials('github-token')
-
     // Expose the api token as an environment variable
     BOOST_API_TOKEN = credentials('boost-api-token')
 
@@ -11,9 +9,6 @@ pipeline {
     // manually define the project name.
     // ex.: boostsecurity/scanner
     // BOOST_GIT_PROJECT = "GIT_SCM_ORG_NAME/GIT_SCM_REPO_NAME"
-
-    // Location where to download the Boost CLI
-    BOOST_TMP_DIR = "${env.WORKSPACE_TMP}/boost"
   }
 
   parameters {
@@ -54,7 +49,7 @@ pipeline {
       steps {
         sh """
           curl -s https://assets.build.boostsecurity.io/boost-cli/get-boost-cli | bash
-          "${BOOST_TMP_DIR}/boost/cli/latest/boost.sh" scan repo
+          "${env.WORKSPACE_TMP}/boost-cli/latest" scan repo
         """
       }
     }
