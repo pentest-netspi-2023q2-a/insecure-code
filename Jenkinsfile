@@ -12,7 +12,7 @@ pipeline {
   }
 
   parameters {
-    booleanParam nane: "workflow_initializing",
+    booleanParam name: "workflow_initializing",
       defaultValue: false
     booleanParam name: "BOOST_API_ENABLED",
       defaultValue: true,
