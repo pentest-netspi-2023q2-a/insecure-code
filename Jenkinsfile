@@ -61,7 +61,7 @@ pipeline {
 
       steps {
         script {
-          scmVars = checkout(scm)
+          def scmVars = checkout scm
           scmVars.each { k, v ->
             env[k] = v
           }
