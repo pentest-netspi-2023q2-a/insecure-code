@@ -17,43 +17,34 @@ pipeline {
   }
 
   parameters {
-    booleanParam
-      name: "BOOST_API_ENABLED",
+    booleanParam name: "BOOST_API_ENABLED",
       defaultValue: true,
       description: ""
     string name: "BOOST_API_ENDPOINT",
       defaultValue: "",
       description: ""
-    string
-      name: "BOOST_CLI_ARGUMENTS",
+    string name: "BOOST_CLI_ARGUMENTS",
       defaultValue: "",
       description: ""
-    string
-      name: "BOOST_CLI_VERSION",
+    string name: "BOOST_CLI_VERSION",
       defaultValue: "",
       description: ""
-    string
-      name: "BOOST_GIT_MAIN_BRANCH",
+    string name: "BOOST_GIT_MAIN_BRANCH",
       defaultValue: "",
       description: ""
-    booleanParam
-      name: "BOOST_IGNORE_FAILIRE",
+    booleanParam name: "BOOST_IGNORE_FAILIRE",
       defaultValue: false,
       description: ""
-    string
-      name: "BOOST_LOG_LEVEL",
+    string name: "BOOST_LOG_LEVEL",
       defaultValue: "INFO",
       description: ""
-    string
-      name: "BOOST_SCAN_LABEL",
+    string name: "BOOST_SCAN_LABEL",
       defaultValue: "",
       description: ""
-    string
-      name: "BOOST_SCANNER_ID",
+    string name: "BOOST_SCANNER_ID",
       defaultValue: "",
       description: ""
-    string
-    name: "BOOST_SCANNER_REGISTRY_MODULE",
+    string name: "BOOST_SCANNER_REGISTRY_MODULE",
     defaultValue: "",
     description: ""
   }
