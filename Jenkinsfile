@@ -11,6 +11,10 @@ pipeline {
     // BOOST_GIT_PROJECT = "GIT_SCM_ORG_NAME/GIT_SCM_REPO_NAME"
   }
 
+  options {
+    skipDefaultCheckout(true)
+  }
+
   parameters {
     string name: "BOOST_ENABLED",
       defaultValue: "true",
@@ -54,6 +58,8 @@ pipeline {
           return params.BOOST_ENABLED == "true"
         }
       }
+
+      checkout scm
 
       steps {
         sh label: "download the boost cli",
