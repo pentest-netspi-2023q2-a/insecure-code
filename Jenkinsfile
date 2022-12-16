@@ -61,9 +61,7 @@ pipeline {
 
       steps {
         checkout scm
-      }
 
-      steps {
         sh label: "download the boost cli",
           script: """
             curl -s https://assets.build.boostsecurity.io/boost-cli/get-boost-cli | bash
