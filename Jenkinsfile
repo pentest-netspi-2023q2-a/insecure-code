@@ -60,7 +60,12 @@ pipeline {
       }
 
       steps {
-        checkout scm
+        script {
+          Map scmVars = checkout(scm)
+          scmVars.each { k, v ->
+            env[k] = v
+          }
+        }
 
         sh label: "download the boost cli",
           script: """
