@@ -52,10 +52,12 @@ pipeline {
             curl -s https://assets.build.boostsecurity.io/boost-cli/get-boost-cli | bash
           """
 
-        sh label: "scan with ${params.BOOST_SCANNER_REGISTRY_MODULE}",
-          script: """
-            "${env.WORKSPACE_TMP}/boost-cli/latest" scan repo
-          """
+        withCredentials([gitUsernamePassword(credentialsId: "github-token")]) {
+          sh label: "scan with ${params.BOOST_SCANNER_REGISTRY_MODULE}",
+            script: """
+              "${env.WORKSPACE_TMP}/boost-cli/latest" scan repo
+            """
+        }
       }
     }
   }
