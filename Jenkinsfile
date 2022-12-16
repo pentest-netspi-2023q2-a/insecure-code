@@ -50,10 +50,8 @@ pipeline {
   stages {
     stage('BoostSecurityScanner') {
       when {
-        expression {
-          // multibranch plugin executes without params on first init
-          params.enabled == "true"
-        }
+        // multibranch plugin executes without params on first init
+        equals actua: params.enabled, expected: "true"
       }
 
       steps {
