@@ -50,9 +50,8 @@ pipeline {
   stages {
     stage('BoostSecurityScanner') {
       when {
-        // multibranch plugin executes without params on first init
         expression {
-          return params.enabled == "true123"
+          return params.enabled == "true"
         }
       }
 
