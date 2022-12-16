@@ -50,6 +50,7 @@ pipeline {
     stage('BoostSecurityScanner') {
       when {
         expression {
+          // multibranch plugin executes without params on first init
           params.workflow_initializing == false
         }
       }
