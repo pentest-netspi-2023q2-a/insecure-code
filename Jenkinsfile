@@ -12,7 +12,7 @@ pipeline {
   }
 
   parameters {
-    string name: "enabled",
+    string name: "BOOST_ENABLED",
       defaultValue: "true",
       description: ""
     booleanParam name: "BOOST_API_ENABLED",
@@ -51,7 +51,7 @@ pipeline {
     stage('BoostSecurityScanner') {
       when {
         expression {
-          return params.enabled == "true"
+          return params.BOOST_ENABLED == "true"
         }
       }
 
@@ -68,6 +68,8 @@ pipeline {
         withCredentials([gitUsernamePassword(credentialsId: "github-token")]) {
           sh label: "scan with ${params.BOOST_SCANNER_REGISTRY_MODULE}",
             script: """
+              // Bug: Parameters may be undefined on initial job configuration
+              test "${BOOST_ENABLED}" == "true" || exit 0
               export BOOST_API_ENABLED=false
               "${env.WORKSPACE_TMP}/boost-cli/latest" scan repo
             """
