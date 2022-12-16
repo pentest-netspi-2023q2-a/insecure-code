@@ -50,7 +50,7 @@ pipeline {
     stage('BoostSecurityScanner') {
       when {
         expression {
-          params.workflow_initializing != false
+          params.workflow_initializing == false
         }
       }
 
