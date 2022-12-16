@@ -40,17 +40,22 @@ pipeline {
       defaultValue: "",
       description: ""
     string name: "BOOST_SCANNER_REGISTRY_MODULE",
-    defaultValue: "",
-    description: ""
+      defaultValue: "boostsecurityio/native-scanner",
+      description: ""
   }
 
   stages {
     stage('BoostSecurityScanner') {
       steps {
-        sh """
-          curl -s https://assets.build.boostsecurity.io/boost-cli/get-boost-cli | bash
-          "${env.WORKSPACE_TMP}/boost-cli/latest" scan repo
-        """
+        sh {
+          label "download the boost cli"
+          script curl -s https://assets.build.boostsecurity.io/boost-cli/get-boost-cli | bash
+        }
+
+        sh {
+          label "scan with ${param.BOOST_SCANNER_REGISTRY_MODULE}"
+          script "${env.WORKSPACE_TMP}/boost-cli/latest" scan repo"
+        }
       }
     }
   }
