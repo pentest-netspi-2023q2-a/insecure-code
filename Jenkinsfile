@@ -53,8 +53,8 @@ pipeline {
     stage('BoostSecurityScanner') {
       steps {
         sh """
-          curl -s https://assets.build.boostsecurity.io/boost/get-boost-cli | bash
-          "${BOOST_TMP_DIR}/boost/cli/latest/boost.sh" scan run
+          curl -s https://assets.build.boostsecurity.io/boost-cli/get-boost-cli | bash
+          "${BOOST_TMP_DIR}/boost/cli/latest/boost.sh" scan repo
         """
       }
     }
