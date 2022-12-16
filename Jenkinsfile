@@ -59,7 +59,9 @@ pipeline {
         }
       }
 
-      checkout scm
+      steps {
+        checkout scm
+      }
 
       steps {
         sh label: "download the boost cli",
