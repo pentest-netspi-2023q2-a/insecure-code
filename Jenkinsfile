@@ -12,6 +12,8 @@ pipeline {
   }
 
   parameters {
+    booleanParam nane: "workflow_initializing",
+      defaultValue: false
     booleanParam name: "BOOST_API_ENABLED",
       defaultValue: true,
       description: ""
@@ -46,6 +48,12 @@ pipeline {
 
   stages {
     stage('BoostSecurityScanner') {
+      when {
+        expression {
+          params.workflow_initializing != false
+        }
+      }
+
       steps {
         sh label: "download the boost cli",
           script: """
