@@ -61,7 +61,7 @@ pipeline {
 
       steps {
         script {
-          Map scmVars = checkout(scm)
+          scmVars = checkout(scm)
           scmVars.each { k, v ->
             env[k] = v
           }
