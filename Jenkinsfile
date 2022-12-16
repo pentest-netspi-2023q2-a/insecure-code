@@ -63,7 +63,7 @@ pipeline {
         script {
           def scmVars = checkout scm
           scmVars.each { k, v ->
-            env[k] = v
+            env.put(k, v)
           }
         }
 
