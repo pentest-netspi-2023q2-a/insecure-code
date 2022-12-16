@@ -12,8 +12,9 @@ pipeline {
   }
 
   parameters {
-    booleanParam name: "workflow_initializing",
-      defaultValue: false
+    string name: "enabled",
+      defaultValue: "true",
+      description: ""
     booleanParam name: "BOOST_API_ENABLED",
       defaultValue: true,
       description: ""
@@ -51,7 +52,7 @@ pipeline {
       when {
         expression {
           // multibranch plugin executes without params on first init
-          params.workflow_initializing == false
+          params.enabled == "true"
         }
       }
 
