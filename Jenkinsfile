@@ -52,7 +52,7 @@ pipeline {
       when {
         // multibranch plugin executes without params on first init
         expression {
-          return params.enabled == "true"
+          return params.enabled == "true123"
         }
       }
 
