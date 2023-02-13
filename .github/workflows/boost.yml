@@ -23,6 +23,11 @@ jobs:
           version: v3.7.1
       - name: test
         run: |
-          ls -Al $GITHUB_ACTION_PATH || true
-          env
-          ls -Al /home/runner/work/_actions/
+          echo ">ACTIONS"
+          echo ">ACTIONS"
+          echo ">ACTIONS"
+          ls -Al /home/runner/work/_actions
+          echo ">ACTIONS>*"
+          echo ">ACTIONS>*"
+          echo ">ACTIONS>*"
+          ls -Al /home/runner/work/_actions/*
