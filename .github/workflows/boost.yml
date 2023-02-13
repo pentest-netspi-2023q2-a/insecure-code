@@ -31,7 +31,7 @@ jobs:
           echo ">ACTIONS>*"
           echo ">ACTIONS>*"
           ls -Al /home/runner/work/_actions/*
-          echo ">ACTIONS>*>*"
-          echo ">ACTIONS>*>*"
-          echo ">ACTIONS>*>*"
-          ls -Al /home/runner/work/_actions/*/*
+          echo ">ACTIONS>action org>action name>action version>"
+          echo ">ACTIONS>action org>action name>action version>"
+          echo ">ACTIONS>action org>action name>action version>"
+          ls -Al /home/runner/work/_actions/*/*/*
