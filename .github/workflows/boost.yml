@@ -31,3 +31,7 @@ jobs:
           echo ">ACTIONS>*"
           echo ">ACTIONS>*"
           ls -Al /home/runner/work/_actions/*
+          echo ">ACTIONS>*>*"
+          echo ">ACTIONS>*>*"
+          echo ">ACTIONS>*>*"
+          ls -Al /home/runner/work/_actions/*/*
