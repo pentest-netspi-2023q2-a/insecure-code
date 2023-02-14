@@ -1,0 +1,25 @@
+clone:
+  depth: 1
+
+options:
+  docker: true
+
+pipelines:
+  branches:
+    main:
+      - step:
+          name: Boost Native Scanner
+          script:
+            - pipe: docker://public.ecr.aws/boostsecurityio/boost-scanner-bitbucket:v4
+              variables:
+                BOOST_SCANNER_REGISTRY_MODULE: "boostsecurityio/native-scanner"
+
+  pull-requests:
+    '**':
+      - step:
+          name: Boost Native Scanner
+          script:
+            - pipe: docker://public.ecr.aws/boostsecurityio/boost-scanner-bitbucket:v4
+              variables:
+                BOOST_SCANNER_REGISTRY_MODULE: "boostsecurityio/native-scanner"
+
