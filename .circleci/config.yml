@@ -1,10 +1,18 @@
-version: 2.1
+version: '2.1'
 orbs:
   boost-security-scanner: boostsecurityio/scanner@4
+
 workflows:
   build:
     jobs:
-      - boost-security-scanner/scan:
-          name: SBOM
-          context: boost-security
-          registry_module: boostsecurityio/trivy-sbom
+      steps:
+        - when:
+            condition:
+              or:
+                - equal: [ main, << pipeline.git.branch >> ]
+            steps:
+              - boost-security-scanner/scan:
+                  context: boost-security
+                  registry_module: boostsecurityio/trivy-sbom             
+
+  version: 2
