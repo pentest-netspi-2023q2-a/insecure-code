@@ -12,6 +12,8 @@ pipelines:
           script:
             - pipe: docker://public.ecr.aws/boostsecurityio/boost-scanner-bitbucket:v4
               variables:
+                BOOST_API_ENDPOINT: ${BOOST_API_ENDPOINT}
+                BOOST_API_TOKEN: ${BOOST_API_TOKEN}
                 BOOST_SCANNER_REGISTRY_MODULE: "boostsecurityio/native-scanner"
 
   pull-requests:
@@ -21,5 +23,7 @@ pipelines:
           script:
             - pipe: docker://public.ecr.aws/boostsecurityio/boost-scanner-bitbucket:v4
               variables:
+                BOOST_API_ENDPOINT: ${BOOST_API_ENDPOINT}
+                BOOST_API_TOKEN: ${BOOST_API_TOKEN}
                 BOOST_SCANNER_REGISTRY_MODULE: "boostsecurityio/native-scanner"
 
