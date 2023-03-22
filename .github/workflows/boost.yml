@@ -57,7 +57,7 @@ jobs:
         if: github.event_name == 'push'
         with:
           api_token: ${{ secrets.BOOST_API_KEY }}
-          registry_module: boostsecurityio/gitleaks
+          registry_module: boostsecurityio/gitleaks-full
 
 
 
@@ -119,4 +119,4 @@ jobs:
         with:
           api_endpoint: https://api.dev.boostsec.io
           api_token: ${{ secrets.BOOST_API_KEY_DEV }}
-          registry_module: boostsecurityio/gitleaks
+          registry_module: boostsecurityio/gitleaks-full
