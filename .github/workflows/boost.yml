@@ -89,8 +89,17 @@ jobs:
           pre_scan_cmd: |
             helm template canaries/helm/charts/hello-world --output-dir ./generated
 
+      - name: Trivy FS
+        uses: boostsecurityio/boostsec-scanner-github@v4
+        with:
+          api_endpoint: https://api.dev.boostsec.io
+          api_token: ${{ secrets.BOOST_API_KEY_DEV }}
+          registry_module: boostsecurityio/trivy-fs
+          additional_args: --registry https://github.com/boostsecurityio/scanner-testing.git
+
       - name: Trivy SBOM image
         uses: boostsecurityio/boostsec-scanner-github@v4
+        if: github.event_name == 'push'
         env:
           BOOST_IMAGE_NAME: debian:bullseye-20211220
         with:
