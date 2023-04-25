@@ -1,0 +1,45 @@
+---
+- name: Download Tomcat8 from tomcat.apache.org
+  hosts: appserver
+  tasks:
+   - name: Download Tomcat using get_url
+     become: yes
+     get_url:
+       url: http://www-us.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz
+       dest: /opt/tomcat8
+       mode: 0755
+       checksum: sha512:https://www.apache.org/dist/tomcat/tomcat-8/v8.5.40/bin/apache-tomcat-8.5.40.tar.gz.sha512
+       group: tomcat
+       owner: tomcat
+       validate_certs: false
+
+   - name: Update all packages to their latest version
+     ansible.builtin.apt:
+       name: "*"
+       force: true
+       state: latest
+       allow_unauthenticated: true
+
+   - name: unsafe yum
+     ansible.builtin.yum:
+       sslverify: false
+       validate_certs: false
+
+
+   - name: unsafe dnf
+     ansible.builtin.dnf:
+       sslverify: false
+       validate_certs: false
+       disable_gpg_check: true
+
+   - name: Install, configure, and start Apache
+     block:
+       - name: Install httpd and memcached
+         ansible.builtin.yum:
+           name:
+           - httpd
+           - memcached
+           state: present
+
+   - name: pan?
+     paloaltonetworks.panos.panos_security_rule: {}
